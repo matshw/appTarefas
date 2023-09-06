@@ -15,6 +15,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.util.List;
 
+import br.mateus.appTarefas.model.ListaTarefaAdapter;
 import br.mateus.appTarefas.model.Tarefa;
 import br.mateus.appTarefas.persistance.TarefaBD;
 import br.mateus.appTarefas.persistance.TarefaDAO;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity{
     private Button botaoCancelar;
     private ListView listar;
     private List<Tarefa>item;
+    private ListaTarefaAdapter arrayTarefa;
     private TarefaDAO dao;
     private Tarefa t;
 
@@ -39,6 +41,9 @@ public class MainActivity extends AppCompatActivity{
         verificar();
         listAdapter();
         click();
+
+        arrayTarefa = new ListaTarefaAdapter(getApplicationContext(),item);
+        listar.setAdapter(arrayTarefa);
     }
 
     private void mapearXML(){
@@ -88,34 +93,33 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int indice, long l) {
                 new AlertDialog.Builder(listar.getContext())
-                        .setTitle("Deseja excluir a tarefa?")
-                        .setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                        .setTitle("O que deseja fazer?")
+                        .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
 
                             }
                         })
-                        .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("Remover", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dao.remove(item.get(indice));
                                 atualizarItens();
                             }
                         })
+                        .setPositiveButton("Editar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                t=item.get(i);
+                                titulo.setText(t.getTitulo());
+                                descricao.setText(t.getDescricao());
+                            }
+                        })
+
                         .create().show();
                 return false;
             }
         });
-
-        listar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                t=item.get(i);
-                titulo.setText(t.getTitulo());
-                descricao.setText(t.getDescricao());
-            }
-        });
-
     }
 
     private void atualizarItens(){
