@@ -36,7 +36,7 @@ public class TarefaBD implements TarefaDAO{
     }
 
     @Override
-    public void remover(Tarefa t) {
+    public void remove(Tarefa t) {
         bd.getWritableDatabase().delete("tarefa","id=?",new String[]{t.getId()+""});
         bd.close();
     }

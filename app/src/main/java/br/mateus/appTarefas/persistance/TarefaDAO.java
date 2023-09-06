@@ -5,6 +5,6 @@ import br.mateus.appTarefas.model.Tarefa;
 public interface TarefaDAO {
     public void salvar (Tarefa t);
     public void editar(Tarefa t);
-    public void remover(Tarefa t);
+    public void remove(Tarefa t);
     public List listar();
 }

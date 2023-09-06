@@ -19,6 +19,7 @@ import br.mateus.appTarefas.model.Tarefa;
 import br.mateus.appTarefas.persistance.TarefaBD;
 import br.mateus.appTarefas.persistance.TarefaDAO;
 import br.mateus.appTarefas.persistance.BancoDados;
+import br.mateus.appTarefas.persistance.TarefaI;
 public class MainActivity extends AppCompatActivity{
 
     private EditText titulo;
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity{
     private Tarefa t;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.Theme_App);
         mapearXML();
@@ -52,8 +53,8 @@ public class MainActivity extends AppCompatActivity{
     private void verificar(){
         if(dao==null){
             dao = new TarefaBD(this);
-            item=dao.listar();
         }
+        item=dao.listar();
     }
 
     private void listAdapter(){
@@ -85,7 +86,7 @@ public class MainActivity extends AppCompatActivity{
 
         listar.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int indice, long l) {
                 new AlertDialog.Builder(listar.getContext())
                         .setTitle("Deseja excluir a tarefa?")
                         .setNegativeButton("Não", new DialogInterface.OnClickListener() {
@@ -97,7 +98,7 @@ public class MainActivity extends AppCompatActivity{
                         .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                dao.remover(item.get(i));
+                                dao.remove(item.get(indice));
                                 atualizarItens();
                             }
                         })
@@ -105,6 +106,16 @@ public class MainActivity extends AppCompatActivity{
                 return false;
             }
         });
+
+        listar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                t=item.get(i);
+                titulo.setText(t.getTitulo());
+                descricao.setText(t.getDescricao());
+            }
+        });
+
     }
 
     private void atualizarItens(){
