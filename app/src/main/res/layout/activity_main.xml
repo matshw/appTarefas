@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/azulescuro">
 
     <ListView
 
@@ -18,33 +19,41 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
-    <Button
-        android:id="@+id/idSalvar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="37dp"
-        android:text="Salvar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idDescricao" />
 
-    <Button
+    <ImageButton
         android:id="@+id/idCancelar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="37dp"
+
+        android:layout_width="77dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#00FFFFFF"
+        android:contentDescription="Sair"
         android:onClick="cancelar"
-        android:text="Cancelar"
-        app:layout_constraintStart_toEndOf="@+id/idSalvar"
-        app:layout_constraintTop_toBottomOf="@+id/idDescricao" />
+        android:src="@drawable/sair"
+        app:layout_constraintBottom_toTopOf="@+id/idTitulo"
+        app:layout_constraintStart_toEndOf="@+id/idSalvar" />
+
+    <ImageButton
+        android:id="@+id/idSalvar"
+        android:layout_width="67dp"
+        android:layout_height="86dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="272dp"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="#00FFFFFF"
+        android:contentDescription="Adicionar"
+        android:scaleType="fitCenter"
+        android:src="@drawable/adicionar"
+        app:layout_constraintBottom_toTopOf="@+id/idTitulo"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/idTitulo"
         android:layout_width="396dp"
         android:layout_height="73dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="116dp"
         android:ems="10"
         android:hint="Título"
         android:inputType="text"
@@ -55,8 +64,8 @@
         android:id="@+id/idDescricao"
         android:layout_width="394dp"
         android:layout_height="142dp"
-        android:layout_marginStart="7dp"
-        android:layout_marginTop="22dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="36dp"
         android:ems="10"
         android:hint="Descrição"
         android:inputType="text"

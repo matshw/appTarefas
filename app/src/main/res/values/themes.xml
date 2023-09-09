@@ -2,4 +2,8 @@
 <resources>
 
     <style name="Theme.App" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Splash" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground"> @drawable/logo </item>
+    </style>
+
 </resources>
