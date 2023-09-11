@@ -3,8 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/idPrincipal"
     android:layout_height="match_parent"
-    android:background="@color/azulescuro">
+    android:background="@color/azulescuro"
+    >
 
     <ListView
 
@@ -71,5 +73,4 @@
         android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idTitulo" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

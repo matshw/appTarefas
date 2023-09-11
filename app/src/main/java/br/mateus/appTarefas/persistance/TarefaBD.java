@@ -28,10 +28,11 @@ public class TarefaBD implements TarefaDAO{
 
     @Override
     public void editar(Tarefa t) {
-        List itens = new ArrayList();
-        if(itens.contains(t)){
-            itens.add(itens.indexOf(t),t);
-        }
+        ContentValues values = new ContentValues();
+        values.put("titulo",t.getTitulo());
+        values.put("descricao",t.getDescricao());
+        bd.getWritableDatabase().update("tarefa",values,"id = ?",new String[]{String.valueOf(t.getId())});
+        bd.close();
     }
 
     @Override
